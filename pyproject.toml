@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "fake-volttron"
+version = "0.1.0rc2"
+description = "fake volttron library for testing github tool"
+authors = ["VOLTTRON Team <volttron@pnnl.gov>"]
+license = "Apache License 2.0"
+readme = "README.md"
+repository = "https://github.com/schandrika/fake-volttron"
+homepage = "https://github.com/schandrika/fake-volttron"
+keywords = []
+packages = [ { include = "dummy", from = "src" } ]
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Other Audience",
+    "License :: OSI Approved :: Apache Software License"
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+
+[tool.yapfignore]
+ignore_patterns = [
+    ".venv/**",
+    ".pytest_cache/**",
+    "dist/**",
+    "docs/**"
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
