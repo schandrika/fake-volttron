@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fake-volttron"
-version = "0.1.0rc2"
+version = "0.1.0rc0"
 description = "fake volttron library for testing github tool"
 authors = ["VOLTTRON Team <volttron@pnnl.gov>"]
 license = "Apache License 2.0"
