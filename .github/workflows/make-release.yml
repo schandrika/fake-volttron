@@ -37,12 +37,6 @@ on:
         default: true
         type: boolean
 
-secrets:
-  git-token:
-    required:  ${{ secrets.GA_PAT_TOKEN }}
-  pypi-token:
-    required: ${{ secrets.TEST_PYPI_TOKEN }}
-
 defaults:
   run:
     shell: bash
@@ -72,7 +66,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: develop
-          token: ${{ secrets.git-token }}
+          token: ${{ secrets.GA_PAT_TOKEN }}
 
       - name: Do a git merge dry run
         id: merge-dry-run
@@ -230,7 +224,7 @@ jobs:
           # check bump-rule and set accordingly
           prerelease: ${{ inputs.bump-rule == 'prerelease'  }}
           tag: ${{ env.NEW_TAG }}
-          token: ${{ secrets.git-token }}
+          token: ${{ secrets.GA_PAT_TOKEN }}
 
       - name: Publish to pypi
         id: publish-to-pypi
@@ -246,7 +240,7 @@ jobs:
         if: ${{ inputs.publish-to-test-pypi  }}
         run: |
           poetry config repositories.test-pypi https://test.pypi.org/legacy/
-          poetry config pypi-token.test-pypi ${{ secrets.pypi-token }}
+          poetry config pypi-token.test-pypi ${{ secrets.TEST_PYPI_TOKEN }}
           poetry publish -r test-pypi
         continue-on-error: true
 
@@ -264,7 +258,7 @@ jobs:
         if: ${{ ! (steps.publish-to-pypi.outcome == 'success' || steps.publish-to-test-pypi.outcome == 'success') }}
         uses: dev-drprasad/delete-tag-and-release@v0.2.1
         env:
-          GITHUB_TOKEN: ${{ secrets.git-token }}
+          GITHUB_TOKEN: ${{ secrets.GA_PAT_TOKEN }}
         with:
           tag_name: ${{ env.NEW_TAG }}
 
