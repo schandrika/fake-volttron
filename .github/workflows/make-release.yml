@@ -37,11 +37,11 @@ on:
         default: true
         type: boolean
 
-    secrets:
-      git-token:
-        required:  ${{ secrets.GA_PAT_TOKEN }}
-      pypi-token:
-        required: ${{ secrets.TEST_PYPI_TOKEN }}
+secrets:
+  git-token:
+    required:  ${{ secrets.GA_PAT_TOKEN }}
+  pypi-token:
+    required: ${{ secrets.TEST_PYPI_TOKEN }}
 
 defaults:
   run:
