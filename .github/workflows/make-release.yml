@@ -61,8 +61,6 @@ jobs:
       #----------------------------------------------
       #       check-out repo and set-up python
       #----------------------------------------------
-      - name: set git url
-        run: git config --add url."git@github.com:".insteadOf "https://github.com/"
       - name: Checkout code
         uses: actions/checkout@v3
         with:
