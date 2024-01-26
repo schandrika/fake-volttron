@@ -193,6 +193,7 @@ jobs:
       #--------------------------------------------------------------
       - name: Merge changes back to main
         run: |
+          echo "GITHUB_TOKEN=${{ secrets.GA_PAT_TOKEN }}" >> "$GITHUB_ENV"
           git checkout main
           git merge ${{ inputs.merge-strategy }} releases/${NEW_TAG}
           git push 
