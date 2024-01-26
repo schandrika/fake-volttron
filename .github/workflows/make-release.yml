@@ -182,7 +182,7 @@ jobs:
         run: |
           git checkout -b releases/${NEW_TAG}
           git config --add url."git@github.com:".insteadOf "https://github.com/"
-          #git config credential.helper '!f() { sleep 1; echo "username=git token=${{secrets.GA_PAT_TOKEN}}"; }; f'
+          git config credential.helper '!f() { sleep 1; echo "username=git token=${{secrets.GA_PAT_TOKEN}}"; }; f'
           git push --set-upstream origin releases/${NEW_TAG}
 
       #--------------------------------------------------------------
