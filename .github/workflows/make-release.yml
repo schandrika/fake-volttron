@@ -176,13 +176,13 @@ jobs:
       #--------------------------------------------------------------
       # Create a new releases/new_tag
       #--------------------------------------------------------------
-      - name: Create a new releases branch
+      - name: Create a new releases branch locally
         env:
           GITHUB_TOKEN: ${{ secrets.GA_PAT_TOKEN }}
         run: |
           git checkout -b releases/${NEW_TAG}
 
-      - name: push new branch to origin
+      - name: push new release branch to origin
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GA_PAT_TOKEN }}
@@ -193,10 +193,13 @@ jobs:
       #--------------------------------------------------------------
       - name: Merge changes back to main
         run: |
-          echo "GITHUB_TOKEN=${{ secrets.GA_PAT_TOKEN }}" >> "$GITHUB_ENV"
           git checkout main
           git merge ${{ inputs.merge-strategy }} releases/${NEW_TAG}
-          git push 
+
+      - name: merge changes back to main - push operation
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GA_PAT_TOKEN }}
 
       - name: Run tests on main branch
         id: run-tests-on-main
@@ -283,4 +286,8 @@ jobs:
         run: |
           git checkout develop
           git merge develop main
-          git push 
+
+      - name: merge changes back to develop - push operation
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GA_PAT_TOKEN }}
