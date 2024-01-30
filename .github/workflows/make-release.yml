@@ -32,7 +32,7 @@ on:
         default: 600
         type: number
       publish-to-test-pypi:
-        description: 'Set to true if you want to publish to https://test.pypi.org/simple/ instead of pypi.org'
+        description: 'Set to true if you want to publish to https://test.pypi.org/legacy/ instead of pypi.org'
         required: false
         default: true
         type: boolean
@@ -252,7 +252,7 @@ jobs:
         id: publish-to-test-pypi
         if: ${{ inputs.publish-to-test-pypi  }}
         run: |
-          poetry config repositories.test-pypi https://test.pypi.org/simple/
+          poetry config repositories.test-pypi https://test.pypi.org/legacy/
           poetry config pypi-token.test-pypi ${{ secrets.TEST_PYPI_TOKEN }}
           poetry publish -r test-pypi
         continue-on-error: true
