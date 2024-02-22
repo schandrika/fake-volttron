@@ -1,0 +1,30 @@
+name: Run Pytests
+
+on:
+  push:
+    paths:
+      - '**.py'
+      - '**.toml'
+      - '**.yaml'
+      - '**.yml'
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - '**.py'
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  LANG: en_US.utf-8
+  LC_ALL: en_US.utf-8
+  PYTHON_VERSION: '3.10'
+  PROJECT_NAME: volttron-core
+
+jobs:
+  test-with-latest-volttron:
+    uses: schandrika/github-tooling/.github/workflows/run-tests.yml@periodic_test
